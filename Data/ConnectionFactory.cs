@@ -12,7 +12,7 @@ namespace SoSAWebsite.Data
             this.connectionString = connectionString;
         }
 
-        public ContainerManager GetCollectionManager()
+        public ContainerManager GetContainerManager()
         {
             return new ContainerManager(new CosmosClient(connectionString), databaseName);
         }

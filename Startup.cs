@@ -32,7 +32,7 @@ namespace SoSAWebsite
                 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
                 {
                     // Set up factory to create production managers
-                    return new ConnectionFactory(Environment.GetEnvironmentVariable("CosmosDb"));
+                    return new ConnectionFactory(Configuration.GetConnectionString("CUSTOMCONNSTR_CosmosDb"));
                 }
                 else 
                 {
