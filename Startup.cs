@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SoSAWebsite.Data;
+using SoSAWebsite.Databases;
 
 namespace SoSAWebsite
 {
@@ -27,19 +28,9 @@ namespace SoSAWebsite
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ConnectionFactory>((_) =>
+            services.AddSingleton<ContainerManagerFactory>((_) =>
             {
-                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
-                {
-                    // Set up factory to create production managers
-                    return new ConnectionFactory(Configuration.GetConnectionString("CosmosDb"));
-                }
-                else 
-                {
-                    Console.WriteLine("Running in Development");
-                    // Set up factory to create development managers
-                    return new ConnectionFactory(Configuration.GetConnectionString("CosmosDb"));
-                }
+                return new ContainerManagerFactory(Configuration.GetConnectionString("CosmosDb"));
             });
 
             services.AddRazorPages();

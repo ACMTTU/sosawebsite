@@ -2,7 +2,7 @@ using Microsoft.Azure.Cosmos;
 using System.Threading.Tasks;
 using System;
 
-namespace SoSAWebsite.Data {
+namespace SoSAWebsite.Databases {
     public class ContainerManager {
         private readonly Database database;
         public enum DatabaseContainers {

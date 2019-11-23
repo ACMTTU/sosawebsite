@@ -1,13 +1,13 @@
 using Microsoft.Azure.Cosmos;
 
-namespace SoSAWebsite.Data
+namespace SoSAWebsite.Databases
 {
-    public class ConnectionFactory
+    public class ContainerManagerFactory
     {
         private readonly string connectionString;
         private const string databaseName = "SoSAWebsiteData";
 
-        public ConnectionFactory(string connectionString)
+        public ContainerManagerFactory(string connectionString)
         {
             this.connectionString = connectionString;
         }
