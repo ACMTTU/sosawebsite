@@ -10,11 +10,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SoSAWebsite.Data;
+using SoSAWebsite.Databases;
 
 namespace SoSAWebsite
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,9 +28,10 @@ namespace SoSAWebsite
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<DatabaseConnector>((_) => 
-                new DatabaseConnector(Configuration.GetConnectionString("DefaultConnection"))
-            );
+            services.AddSingleton<ContainerManagerFactory>((_) =>
+            {
+                return new ContainerManagerFactory(Configuration.GetConnectionString("CosmosDb"));
+            });
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
