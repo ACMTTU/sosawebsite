@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SoSAWebsite.Application.Data;
+using SoSAWebsite.Application.Data.ContainerManager;
 
 namespace SoSAWebsite.Application
 {
@@ -26,6 +27,11 @@ namespace SoSAWebsite.Application
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<ContainerManagerFactory>((_) =>
+            {
+                return new ContainerManagerFactory(Configuration.GetConnectionString("CosmosDb"));
+            });
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();

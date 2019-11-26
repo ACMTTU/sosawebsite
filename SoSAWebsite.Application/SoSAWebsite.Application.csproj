@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.4.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\ContainerManager\" />
+  </ItemGroup>
 </Project>
