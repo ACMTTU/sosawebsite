@@ -1,0 +1,33 @@
+﻿<Styled @bind-Classname="@image">
+    border-radius: 50%;
+    width: 20%;
+</Styled>
+
+<Styled @bind-Classname="@sections">
+    margin-top: 3rem;
+</Styled>
+
+<Styled @bind-Classname="@description">
+    font-size: 1.5rem;
+    padding: 0px 20px;
+</Styled>
+
+<BSRow class="@sections">
+    <BSMedia>
+        <BSImage class="@image"
+                 Alignment="Alignment.Left"
+                 src=@ImageSource
+                 alt=@AltImageDescription />
+        <span class="@description">@Description</span>
+    </BSMedia>
+</BSRow>
+
+@code {
+    [Parameter] public string Description { get; set; }
+    [Parameter] public string ImageSource { get; set; }
+    [Parameter] public string AltImageDescription { get; set; }
+
+    private string image;
+    private string sections;
+    private string description;
+}

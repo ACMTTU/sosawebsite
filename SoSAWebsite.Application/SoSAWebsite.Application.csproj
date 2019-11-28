@@ -11,4 +11,7 @@
   <ItemGroup>
     <Content Remove="Pages\Counter.razor" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Home\" />
+  </ItemGroup>
 </Project>
