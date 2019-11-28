@@ -2,11 +2,17 @@
 @inject IBootstrapCSS BootstrapCSS
 
 <div class="main">
-    <Navigation />
+    <NavigationBar />
     <div class="content px-4">
         @Body
     </div>
 </div>
+
+<Styled>
+    p {
+        font-size: 1.5rem;
+    }
+</Styled>
 
 @code {
     private bool isServerSide = false;
