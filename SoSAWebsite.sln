@@ -1,9 +1,9 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoSAWebsite.Application", "SoSAWebsite.Application\SoSAWebsite.Application.csproj", "{9DE6285F-EC2B-48B5-9FAB-EA3F4C4BCF78}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoSAWebsite.Tests", "SoSAWebsite.Tests\SoSAWebsite.Tests.csproj", "{75BC3F86-B367-4423-B809-9CDC73F625FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoSAWebsite.Application", "SoSAWebsite.Application\SoSAWebsite.Application.csproj", "{DB444531-754D-4AC6-B9F6-A0633A0CFE24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9DE6285F-EC2B-48B5-9FAB-EA3F4C4BCF78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DE6285F-EC2B-48B5-9FAB-EA3F4C4BCF78}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DE6285F-EC2B-48B5-9FAB-EA3F4C4BCF78}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DE6285F-EC2B-48B5-9FAB-EA3F4C4BCF78}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75BC3F86-B367-4423-B809-9CDC73F625FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75BC3F86-B367-4423-B809-9CDC73F625FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75BC3F86-B367-4423-B809-9CDC73F625FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75BC3F86-B367-4423-B809-9CDC73F625FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB444531-754D-4AC6-B9F6-A0633A0CFE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB444531-754D-4AC6-B9F6-A0633A0CFE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB444531-754D-4AC6-B9F6-A0633A0CFE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB444531-754D-4AC6-B9F6-A0633A0CFE24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

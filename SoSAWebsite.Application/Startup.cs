@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SoSAWebsite.Application.Data;
 using SoSAWebsite.Application.Data.ContainerManager;
+using BlazorStrap;
+using BlazorStyled;
 
 namespace SoSAWebsite.Application
 {
@@ -34,6 +36,10 @@ namespace SoSAWebsite.Application
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            services.AddBlazorStyled();
+            services.AddBootstrapCSS();
+
             services.AddSingleton<WeatherForecastService>();
         }
 

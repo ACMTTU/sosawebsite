@@ -1,15 +1,44 @@
 ﻿@inherits LayoutComponentBase
+@inject IBootstrapCSS BootstrapCSS
 
-<div class="sidebar">
-    <NavMenu />
-</div>
+@*
+    We load up the CSS of BootStrap here
+    and load up global CSS
+*@
 
 <div class="main">
-    <div class="top-row px-4">
-        <a href="https://docs.microsoft.com/en-us/aspnet/" target="_blank">About</a>
-    </div>
-
+    <NavigationBar />
     <div class="content px-4">
         @Body
     </div>
 </div>
+
+<Styled>
+    p {
+        font-size: 1.5rem;
+    }
+</Styled>
+
+@code {
+    private bool isServerSide = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await BootstrapCSS.SetBootstrapCSS("4.3.1");
+        }
+        catch (Exception)
+        {
+            isServerSide = true;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstrun)
+    {
+        if (isServerSide && firstrun)
+        {
+            await BootstrapCSS.SetBootstrapCSS("4.3.1");
+        }
+    }
+}
