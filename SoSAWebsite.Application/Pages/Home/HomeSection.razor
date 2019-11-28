@@ -1,0 +1,42 @@
+﻿<Styled @bind-Classname="@image">
+    border-radius: 50%;
+    width: 20%;
+    min-width: 200px;
+</Styled>
+
+<Styled @bind-Classname="@imageContainer">
+    display: flex;
+    justify-content: center;
+</Styled>
+
+<Styled @bind-Classname="@sections">
+    margin-top: 3rem;
+</Styled>
+
+<Styled @bind-Classname="@text" MediaQuery="MediaQueries.Mobile">
+    text-align: center;
+</Styled>
+
+<BSRow class="@sections">
+    <BSCol MD="4" SM="12" Class="@imageContainer">
+        <BSImage class="@image"
+                 Alignment="Alignment.Left"
+                 src=@ImageSource
+                 alt=@AltImageDescription />
+    </BSCol>
+    <BSCol Class="@text">
+        <h2>@AltImageDescription</h2>
+        <p>@Description</p>
+    </BSCol>
+</BSRow>
+
+@code {
+    [Parameter] public string Description { get; set; }
+    [Parameter] public string ImageSource { get; set; }
+    [Parameter] public string AltImageDescription { get; set; }
+
+    private string imageContainer;
+    private string image;
+    private string sections;
+    private string text;
+}

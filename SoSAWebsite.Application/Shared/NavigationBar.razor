@@ -1,0 +1,34 @@
+﻿<BSNavbar IsExpand="true" IsDark="true" Color="Color.Dark" IsStickyTop="true">
+    <BSNavbarBrand Href="/">Society Of Sofware Architects</BSNavbarBrand>
+    <BSNavbarToggler OnClick="@onClick" />
+        <BSCollapse IsOpen="@IsNavBarOpen" IsNavbar="true" IsOpenChanged="@OnNavBarOpenChanged">
+            <BSNav IsList="true" IsNavbar="true">
+                <BSNavItem>
+                    <BSNavLink Href="/">HOME</BSNavLink>
+                </BSNavItem>
+                <BSNavItem>
+                    <BSNavLink Href="/projects">PROJECTS</BSNavLink>
+                </BSNavItem>
+                <BSNavItem>
+                    <BSNavLink Href="/join">JOIN</BSNavLink>
+                </BSNavItem>
+            </BSNav>
+        </BSCollapse>
+</BSNavbar>
+
+@code {
+    private bool IsNavBarOpen { get; set; } = true;
+
+
+    private async void OnNavBarOpenChanged(bool e)
+    {
+        this.IsNavBarOpen = e;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    void onClick(dynamic e)
+    {
+        this.IsNavBarOpen = !this.IsNavBarOpen;
+        StateHasChanged();
+    }
+}

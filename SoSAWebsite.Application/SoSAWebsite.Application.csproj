@@ -5,5 +5,14 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.4.1" />
+    <PackageReference Include="BlazorStrap" Version="1.0.106" />
+    <PackageReference Include="BlazorStyled" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Pages\Counter.razor" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Home\" />
   </ItemGroup>
 </Project>
