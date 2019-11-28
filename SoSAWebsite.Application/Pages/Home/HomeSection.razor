@@ -13,14 +13,19 @@
     margin-top: 3rem;
 </Styled>
 
+<Styled @bind-Classname="@text" MediaQuery="MediaQueries.Mobile">
+    text-align: center;
+</Styled>
+
 <BSRow class="@sections">
-    <BSCol XS="12" SM="3" Class="@imageContainer">
+    <BSCol MD="4" SM="12" Class="@imageContainer">
         <BSImage class="@image"
                  Alignment="Alignment.Left"
                  src=@ImageSource
                  alt=@AltImageDescription />
     </BSCol>
-    <BSCol>
+    <BSCol Class="@text">
+        <h2>@AltImageDescription</h2>
         <p>@Description</p>
     </BSCol>
 </BSRow>
@@ -33,4 +38,5 @@
     private string imageContainer;
     private string image;
     private string sections;
+    private string text;
 }
