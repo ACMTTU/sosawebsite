@@ -1,0 +1,37 @@
+﻿@namespace SoSAWebsite.Application.Pages.Projects
+
+<Styled @bind-Classname="@item">
+    margin-bottom: 30px;
+</Styled>
+
+<BSCol MD="4" class="@item">
+    <BSCard CardType="CardType.Card">
+        <BSCard
+                CardType="CardType.Image"
+                VerticalAlignment="VerticalAlignment.Top"
+                src="@ImageSource"
+                alt="Project Image"
+                />
+        <BSCard CardType="CardType.Body">
+            <BSCard HeadingSize="HeadingSize.H2" CardType="CardType.Title">@Title</BSCard>
+            <BSCard CardType="CardType.Subtitle">@Description</BSCard>
+            <BSButton @onclick="@OnMoreInfo">More Info</BSButton>
+        </BSCard>
+    </BSCard>
+</BSCol>
+
+@code {
+    [Parameter] public string ProjectId { get; set; } = "Bad Id That Does Not Exist";
+    [Parameter] public string Title { get; set; } = "New ACM Project!";
+    [Parameter] public bool IsNewProject { get; set; } = true;
+    [Parameter] public string ImageSource { get; set; } = "https://rdironworks.com/wp-content/uploads/2017/12/dummy-200x200.png";
+    [Parameter] public string Description { get; set; } = "A SoSA managed Project";
+
+    // Styles
+    private string item;
+
+    public void OnMoreInfo()
+    {
+        Console.WriteLine("Clicked More Info Button");
+    }
+}
