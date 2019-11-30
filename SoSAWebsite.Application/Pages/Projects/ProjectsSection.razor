@@ -1,4 +1,5 @@
 ﻿@namespace SoSAWebsite.Application.Pages.Projects
+@using Markdig
 
 <Styled @bind-Classname="@item">
     margin-bottom: 30px;
@@ -15,10 +16,21 @@
         <BSCard CardType="CardType.Body">
             <BSCard HeadingSize="HeadingSize.H2" CardType="CardType.Title">@Title</BSCard>
             <BSCard CardType="CardType.Subtitle">@Description</BSCard>
-            <BSButton @onclick="@OnMoreInfo">More Info</BSButton>
+            <BSButton OnClick="@(() => ModalReference.Show())">More Info</BSButton>
         </BSCard>
     </BSCard>
 </BSCol>
+
+<BSModal @ref="@ModalReference">
+    <BSModalHeader OnClick="@(() => @ModalReference.Hide())">@Title</BSModalHeader>
+    <BSModalBody>
+        @((MarkupString)BuildHTMLFromMarkdown(ExtendedDescripton))
+    </BSModalBody>
+    <BSModalFooter>
+        <BSButton Color="Color.Secondary" OnClick="@(() => @ModalReference.Hide())">Close</BSButton>
+        <BSButton Color="Color.Primary" OnClick="@(() => @ModalReference.Hide())">Save Changes</BSButton>
+    </BSModalFooter>
+</BSModal>
 
 @code {
     [Parameter] public string ProjectId { get; set; } = "Bad Id That Does Not Exist";
@@ -26,12 +38,21 @@
     [Parameter] public bool IsNewProject { get; set; } = true;
     [Parameter] public string ImageSource { get; set; } = "https://rdironworks.com/wp-content/uploads/2017/12/dummy-200x200.png";
     [Parameter] public string Description { get; set; } = "A SoSA managed Project";
+    [Parameter] public string ExtendedDescripton { get; set; } = "Here is where **a lot** of things can [go](https://google.com)!!!";
+
+    BSModal ModalReference;
 
     // Styles
     private string item;
 
-    public void OnMoreInfo()
+    /// <summary>
+    /// This is so that we can display markdown that project leads create
+    /// for their own projects
+    /// </summary>
+    /// <param name="markdown">The MarkDown for the extended description</param>
+    /// <returns></returns>
+    private string BuildHTMLFromMarkdown(string markdown)
     {
-        Console.WriteLine("Clicked More Info Button");
+        return Markdown.ToHtml(markdown, new MarkdownPipelineBuilder().UseAdvancedExtensions().Build());
     }
 }
