@@ -1,5 +1,6 @@
 ﻿@namespace SoSAWebsite.Application.Pages.Projects
 @using Markdig
+@using Models
 
 <Styled @bind-Classname="@item">
     margin-bottom: 30px;
@@ -10,21 +11,21 @@
         <BSCard
                 CardType="CardType.Image"
                 VerticalAlignment="VerticalAlignment.Top"
-                src="@ImageSource"
+                src="@project.imageSource"
                 alt="Project Image"
                 />
         <BSCard CardType="CardType.Body">
-            <BSCard HeadingSize="HeadingSize.H2" CardType="CardType.Title">@Title</BSCard>
-            <BSCard CardType="CardType.Subtitle">@Description</BSCard>
+            <BSCard HeadingSize="HeadingSize.H2" CardType="CardType.Title">@project.name</BSCard>
+            <BSCard CardType="CardType.Subtitle">@project.description</BSCard>
             <BSButton OnClick="@(() => ModalReference.Show())">More Info</BSButton>
         </BSCard>
     </BSCard>
 </BSCol>
 
 <BSModal @ref="@ModalReference">
-    <BSModalHeader OnClick="@(() => @ModalReference.Hide())">@Title</BSModalHeader>
+    <BSModalHeader OnClick="@(() => @ModalReference.Hide())">@project.name</BSModalHeader>
     <BSModalBody>
-        @((MarkupString)BuildHTMLFromMarkdown(ExtendedDescripton))
+        @((MarkupString)buildHTMLFromMarkdown(project.extendedDescription))
     </BSModalBody>
     <BSModalFooter>
         <BSButton Color="Color.Secondary" OnClick="@(() => @ModalReference.Hide())">Close</BSButton>
@@ -33,17 +34,53 @@
 </BSModal>
 
 @code {
-    [Parameter] public string ProjectId { get; set; } = "Bad Id That Does Not Exist";
-    [Parameter] public string Title { get; set; } = "New ACM Project!";
-    [Parameter] public bool IsNewProject { get; set; } = true;
-    [Parameter] public string ImageSource { get; set; } = "https://rdironworks.com/wp-content/uploads/2017/12/dummy-200x200.png";
-    [Parameter] public string Description { get; set; } = "A SoSA managed Project";
-    [Parameter] public string ExtendedDescripton { get; set; } = "Here is where **a lot** of things can [go](https://google.com)!!!";
+    [Parameter] public Project project { get; set; }
 
     BSModal ModalReference;
 
     // Styles
     private string item;
+
+    protected override void OnInitialized()
+    {
+        if (project == null)
+        {
+            project = new Project();
+        }
+
+        setUpDefaultValues();
+    }
+
+    /// <summary>
+    /// This is just for design purposes so that we can see how everything looks
+    /// </summary>
+    private void setUpDefaultValues()
+    {
+        if (String.IsNullOrWhiteSpace(project.id))
+        {
+            project.id = "Bad Id That Does Not Exist";
+        }
+
+        if (String.IsNullOrWhiteSpace(project.name))
+        {
+            project.title = "New ACM Project!";
+        }
+
+        if (String.IsNullOrWhiteSpace(project.imageSource))
+        {
+            project.imageSource = "https://rdironworks.com/wp-content/uploads/2017/12/dummy-200x200.png";
+        }
+
+        if (String.IsNullOrWhiteSpace(project.description))
+        {
+            project.description = "A SoSA managed Project";
+        }
+
+        if (String.IsNullOrWhiteSpace(project.extendedDescription))
+        {
+            project.extendedDescription = "Here is where **a lot** of things can [go](https://google.com)!!!";
+        }
+    }
 
     /// <summary>
     /// This is so that we can display markdown that project leads create
@@ -51,7 +88,7 @@
     /// </summary>
     /// <param name="markdown">The MarkDown for the extended description</param>
     /// <returns></returns>
-    private string BuildHTMLFromMarkdown(string markdown)
+    private string buildHTMLFromMarkdown(string markdown)
     {
         return Markdown.ToHtml(markdown, new MarkdownPipelineBuilder().UseAdvancedExtensions().Build());
     }
