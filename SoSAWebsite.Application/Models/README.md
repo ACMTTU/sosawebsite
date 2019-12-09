@@ -12,17 +12,20 @@ User(
 
 ```json
 Project(
-    id:             str            # unique identifier for project
-    name:           str            # name shown to users
-    description:    str            # project purpose and requirements
-    projectOwner:   int            # id of the user who owns the project
+    id:                     str            # unique identifier for project
+    name:                   str            # name shown to users
+    description:            str            # project purpose and requirements
+    extendedDescription:    str            # extended project purpose and requirements
+    imageSource             str            # location of media
+    isNewProject            bool           # whether or not it is a new project for the semester
+    projectOwner:           int            # id of the user who owns the project
 )
 ```
 
 # Event Attributes
 
 ```json
-Project(
+Event(
     id:             str            # unique identifier for event89       
     name:           str            # name shown to users
     startDate:      DateTime       # date event starts
