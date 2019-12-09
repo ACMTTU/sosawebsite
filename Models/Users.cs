@@ -7,7 +7,7 @@ namespace Models
     public class User
     {
 
-        public int userID { get; set; }
+        public String id { get; set; }
         public String displayName { get; set; }
 
         public DateTime graduationDate { get; set; }

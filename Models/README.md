@@ -12,7 +12,7 @@ User(
 
 ```json
 Project(
-    id:             int            # unique identifier for project
+    id:             str            # unique identifier for project
     name:           str            # name shown to users
     description:    str            # project purpose and requirements
     projectOwner:   int            # id of the user who owns the project
@@ -23,7 +23,7 @@ Project(
 
 ```json
 Project(
-    eventID:        int            # unique identifier for event89       
+    id:             str            # unique identifier for event89       
     name:           str            # name shown to users
     startDate:      DateTime       # date event starts
     endDate:        int            # date event ends
