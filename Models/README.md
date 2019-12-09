@@ -2,7 +2,7 @@
 
 ```json
 User(
-    userID:         int            # unique identifier for user
+    id:             str            # unique identifier for user
     displayName:    str            # name shown to other users
     graduationDate: DateTime       # expected graduation date of user
 )
@@ -12,9 +12,20 @@ User(
 
 ```json
 Project(
-    projectID:      int            # unique identifier for project
+    id:             int            # unique identifier for project
     name:           str            # name shown to users
     description:    str            # project purpose and requirements
     projectOwner:   int            # id of the user who owns the project
+)
+```
+
+# Event Attributes
+
+```json
+Project(
+    eventID:        int            # unique identifier for event89       
+    name:           str            # name shown to users
+    startDate:      DateTime       # date event starts
+    endDate:        int            # date event ends
 )
 ```
