@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Models
 {
+    /// <summary>
+    /// Permissions that the user has that can be read and updated
+    /// </summary>
     public class UserPermissions
     {
         public Dictionary<PermissionTypes, Permission> Permissions { get; private set; }
@@ -13,15 +16,9 @@ namespace Models
         }
 
         /// <summary>
-        /// Overwrites old permission and replaces it with new one
+        /// Sets Permissions based on a preset. This is also a convenience function
         /// </summary>
-        /// <param name="newPermission"></param>
-        public void AddPermissions(Permission newPermission)
-        {
-            Permissions.Remove(newPermission.permissionType);
-            Permissions.Add(newPermission.permissionType, newPermission);
-        }
-
+        /// <param name="preset">The preset to apply</param>
         public void SetPermissionPreset(PermissionPresets preset)
         {
             Permission paymentPermission = new Permission(PermissionTypes.Payments);
@@ -99,6 +96,16 @@ namespace Models
         }
 
         /// <summary>
+        /// Overwrites old permission and replaces it with new one
+        /// </summary>
+        /// <param name="newPermission"></param>
+        private void AddPermissions(Permission newPermission)
+        {
+            Permissions.Remove(newPermission.permissionType);
+            Permissions.Add(newPermission.permissionType, newPermission);
+        }
+
+        /// <summary>
         /// Gets all of the current permissions from the database
         /// </summary>
         /// <returns>The permissions the user already has</returns>
@@ -159,7 +166,7 @@ namespace Models
     }
 
     /// <summary>
-    /// 
+    /// Option to choose which Access the user would like to read
     /// </summary>
     public enum AccessTypes
     {
