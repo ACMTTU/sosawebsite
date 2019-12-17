@@ -2,9 +2,10 @@
 
 ```json
 User(
-    id:             str            # unique identifier for user
-    displayName:    str            # name shown to other users
-    graduationDate: DateTime       # expected graduation date of user
+    id:             str             # unique identifier for user
+    displayName:    str             # name shown to other users
+    graduationDate: DateTime        # expected graduation date of user
+    permissions:    UserPermissions # permissions that a user has
 )
 ```
 
