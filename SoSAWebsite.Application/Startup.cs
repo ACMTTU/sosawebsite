@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SoSAWebsite.Application.Data;
-using SoSAWebsite.Application.Data.ContainerManager;
 using BlazorStrap;
 using BlazorStyled;
 
@@ -31,7 +30,7 @@ namespace SoSAWebsite.Application
         {
             services.AddSingleton((_) =>
             {
-                return new ContainerManagerFactory(Configuration.GetConnectionString("CosmosDb"));
+                return new ContainerFactory(Configuration.GetConnectionString("CosmosDb"));
             });
 
             services.AddRazorPages();
