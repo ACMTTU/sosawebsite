@@ -8,7 +8,7 @@
 
 <div class="main">
     <NavigationBar />
-    <div class="content px-4">
+    <div class="@container content px-4">
         @Body
     </div>
 </div>
@@ -19,8 +19,13 @@
     }
 </Styled>
 
+<Styled @bind-Classname="@container">
+    margin-top: 30px;
+</Styled>
+
 @code {
     private bool isServerSide = false;
+    private string container;
 
     protected override async Task OnInitializedAsync()
     {
