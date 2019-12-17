@@ -33,6 +33,8 @@ namespace SoSAWebsite.Application
                 return new ContainerFactory(Configuration.GetConnectionString("CosmosDb"));
             });
 
+            services.AddSingleton<UsersService>();
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
