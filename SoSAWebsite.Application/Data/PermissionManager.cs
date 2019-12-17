@@ -1,22 +1,42 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Models;
 
-namespace Models
+namespace SoSAWebsite.Application.Data
 {
     /// <summary>
     /// Permissions that the user has that can be read and updated
     /// </summary>
-    public class UserPermissions
+    /// 
+    /// How to use:
+    /// 1. Load up a User to manage the permissions for
+    /// 2. Create a PermissionManager and provide the initial values for the permissions
+    /// 3. Save changes to User object
+    /// 4. Save User object to database
+    public class PermissionManager
     {
-        public Dictionary<PermissionTypes, Permission> Permissions { get; private set; }
+        private Dictionary<PermissionTypes, Permission> Permissions { get; set; }
 
-        public UserPermissions()
+        /// <summary>
+        /// Can be used to set permissions for a certain entity.
+        /// Makes provisioning permissions a lot easier.
+        /// </summary>
+        /// <param name="permissions"></param>
+        public PermissionManager(IEnumerable<Permission> permissions)
         {
             this.Permissions = new Dictionary<PermissionTypes, Permission>();
+            foreach (Permission p in permissions)
+            {
+                this.Permissions.Add(p.permissionType, p);
+            }
         }
 
         /// <summary>
-        /// Sets Permissions based on a preset. This is also a convenience function
+        /// Sets Permissions based on a preset. This is also a convenience function.
+        /// Does not automatically save into the database. Must call Update database
+        /// manually.
         /// </summary>
         /// <param name="preset">The preset to apply</param>
         public void SetPermissionPreset(PermissionPresets preset)
@@ -25,6 +45,7 @@ namespace Models
             Permission teamsPermission = new Permission(PermissionTypes.TeamManagement);
             Permission projectPermission = new Permission(PermissionTypes.ProjectReview);
 
+            // Create permissions based on an option
             switch (preset)
             {
                 case (PermissionPresets.Admin):
@@ -59,8 +80,17 @@ namespace Models
                     projectPermission.WriteAccess = false;
                     projectPermission.ReadAccess = false;
                     break;
+                default:
+                    // This happens when a preset has not been made.
+                    throw new Exception("No preset values found for: " + preset.ToString());
             }
 
+            // Makes sure that we don't have any leftover permissions
+            // At this point in time, we are confident that the new permissions
+            // have been properly set
+            this.Permissions.Clear();
+
+            // Add all permissions as new ones
             AddPermissions(paymentPermission);
             AddPermissions(teamsPermission);
             AddPermissions(projectPermission);
@@ -106,71 +136,29 @@ namespace Models
         }
 
         /// <summary>
-        /// Gets all of the current permissions from the database
+        /// Turns the hashmap into an array that is NoSQL friendly
         /// </summary>
-        /// <returns>The permissions the user already has</returns>
-        private void GetCurrentSavedPermissions()
+        /// <returns>An array of Permissions</returns>
+        public Permission[] ToArray()
         {
-            throw new NotImplementedException();
+            List<Permission> permissions = new List<Permission>();
+            foreach (KeyValuePair<PermissionTypes, Permission> p in this.Permissions)
+            {
+                permissions.Add(p.Value);
+            }
+
+            return permissions.ToArray();
         }
 
         /// <summary>
-        /// Saves the information in Permissions into the database
+        /// Overwrites the user's permissions
         /// </summary>
-        private void Save()
+        /// <param name="user">The user to change</param>
+        /// <returns>The same user reference with new permissions</returns>
+        public User SaveToUser(User user)
         {
-            throw new NotImplementedException();
+            user.permissions = this.ToArray();
+            return user;
         }
-    }
-
-    /// <summary>
-    /// Smallest representation of a permission
-    /// </summary>
-    public class Permission
-    {
-        public readonly PermissionTypes permissionType;
-        public bool ReadAccess { get; set; }
-        public bool WriteAccess { get; set; }
-
-        public Permission(PermissionTypes permisionType)
-        {
-            this.permissionType = permisionType;
-        }
-    }
-
-    /// <summary>
-    /// Fundamental Permission Types to allow for ganular access management
-    /// </summary>
-    public enum PermissionTypes
-    {
-        // Permissions regarding the payments
-        Payments,
-
-        // Permissions regarding adding/removing students from teams
-        TeamManagement,
-
-        // Permissions regarding review and approving project proposals
-        ProjectReview,
-    }
-
-    /// <summary>
-    /// Permission Presets for ease of use. Each enum should come with
-    /// predefined permissions to set.
-    /// </summary>
-    public enum PermissionPresets
-    {
-        Admin,
-        PaymentsManager,
-        ProjectLead,
-        Member
-    }
-
-    /// <summary>
-    /// Option to choose which Access the user would like to read
-    /// </summary>
-    public enum AccessTypes
-    {
-        ReadAccess,
-        WriteAccess
     }
 }

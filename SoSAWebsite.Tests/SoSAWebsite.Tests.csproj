@@ -16,4 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SoSAWebsite.Application\SoSAWebsite.Application.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="UnitTest1.cs" />
+  </ItemGroup>
 </Project>

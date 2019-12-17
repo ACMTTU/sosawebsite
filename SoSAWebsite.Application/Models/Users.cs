@@ -9,7 +9,7 @@ namespace Models
         public String id { get; set; }
         public String displayName { get; set; }
         public DateTime graduationDate { get; set; }
-        public UserPermissions permissions { get; set; }
+        public Permission[] permissions { get; set; }
     }
 
 }
