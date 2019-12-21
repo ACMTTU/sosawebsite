@@ -14,5 +14,6 @@ namespace Models
         public String projectOwner { get; set; }
         public Boolean isNewProject { get; set; }
         public String imageSource { get; set; }
+        public String proposalSource { get; set; }
     }
 }

@@ -13,28 +13,20 @@ else
     <BSTable>
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Title</th>
+                <th scope="col">Project Lead</th>
+                <th scope="col">Link to Proposal</th>
             </tr>
         </thead>
         <tbody>
+            @foreach (Project project in this.projects)
+            {
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
+                <th>@project.name</th>
+                <td>@project.projectOwner</td>
+                <td>@project.proposalSource</td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-            </tr>
+            }
         </tbody>
     </BSTable>
 }
@@ -64,8 +56,8 @@ else
         {
             id = "Something",
             name = "Notes Sharing Application",
-            description = "A Platform for sharing notes with your friends and other peers in a streamline fashion",
-            extendedDescription = "A Platform for sharing notes with your friends and other peers in a streamline fashion. Which is an even longer description",
+            projectOwner = "Miggy Reyes",
+            proposalSource = "Somewhere",
         };
 
         this.projects.Add(newProject);
