@@ -11,8 +11,9 @@ namespace Models
         public String name { get; set; }
         public String extendedDescription { get; set; }
         public String description { get; set; }
-        public int projectOwner { get; set; }
+        public String projectOwner { get; set; }
         public Boolean isNewProject { get; set; }
         public String imageSource { get; set; }
+        public String proposalSource { get; set; }
     }
 }

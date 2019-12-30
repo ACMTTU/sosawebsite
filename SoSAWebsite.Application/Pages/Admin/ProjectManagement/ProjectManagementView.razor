@@ -1,0 +1,84 @@
+﻿@using Models
+
+@if (projects == null)
+{
+    <h1>Loading...</h1>
+}
+else if (projects.Count == 0)
+{
+    <h1>No Projects available for you to see/edit</h1>
+}
+else
+{
+    <BSTable>
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Project Lead</th>
+                <th scope="col">Link to Proposal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Project project in this.projects)
+            {
+            <tr>
+                <th>@project.name</th>
+                <td>@project.projectOwner</td>
+                <td>@project.proposalSource</td>
+            </tr>
+            }
+        </tbody>
+    </BSTable>
+}
+
+@code {
+    private ICollection<Project> projects;
+
+    /// <summary>
+    /// Populates the projects wiht projects the user owns,
+    /// and then the user has access to.
+    /// </summary>
+    /// <returns></returns>
+    protected override async Task OnInitializedAsync()
+    {
+        await this.GetOwnedProjects();
+        await this.GetAccessibleProjects();
+
+        this.UITest();
+    }
+
+    /// <summary>
+    /// Just to test the UI
+    /// </summary>
+    private void UITest()
+    {
+        Project newProject = new Project()
+        {
+            id = "Something",
+            name = "Notes Sharing Application",
+            projectOwner = "Miggy Reyes",
+            proposalSource = "Somewhere",
+        };
+
+        this.projects.Add(newProject);
+    }
+
+    /// <summary>
+    /// Grabs the projects the user owns since they are automatically
+    /// given the rights to their own project
+    /// </summary>
+    private Task GetOwnedProjects()
+    {
+        this.projects = new List<Project>();
+        return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Grabs the Projects that the user has access to read or write to
+    /// </summary>
+    private Task GetAccessibleProjects()
+    {
+        this.projects = new List<Project>();
+        return Task.CompletedTask;
+    }
+}

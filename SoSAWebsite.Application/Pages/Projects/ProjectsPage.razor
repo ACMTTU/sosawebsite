@@ -5,20 +5,13 @@
     justify-content: center;
 </Styled>
 
-<Styled @bind-Classname="@container">
-    margin-top: 30px;
-</Styled>
-
-<BSContainer class="@container">
-    <BSRow class="@row">
-        @for(int i = 0; i < 5; i++)
-        {
-            <ProjectsSection />
-        }
-    </BSRow>
-</BSContainer>
+<BSRow class="@row">
+    @for(int i = 0; i < 5; i++)
+    {
+        <ProjectsSection />
+    }
+</BSRow>
 
 @code {
     private string row;
-    private string container;
 }
