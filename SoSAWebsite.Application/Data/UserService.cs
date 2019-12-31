@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using Models
+using Models;
+
 using SoSAWebsite.Application.Data.ContainerManager;
-using Microsoft.Azure.Cosmos;
 
 namespace SoSAWebsite.Application.Data
 {
     public class UserService
     {
 
-        private Container container;
+        private Microsoft.Azure.Cosmos.Container container;
 
         /// <summary>
-        /// Example for connecting to the database
+        /// Connect to the database
         /// </summary>
         /// <param name="containerManagerFactory"></param>
         public UserService(ContainerManagerFactory containerManagerFactory)
@@ -23,9 +23,13 @@ namespace SoSAWebsite.Application.Data
             container = containerManager.GetContainer(DatabaseContainers.Users);
         }
 
-        public void createUser()
+        /// <summary>
+        /// Create a new user
+        /// </summary>
+        /// <param name="containerManagerFactory"></param>
+        public void createUser(User user)
         {
-
+            container.CreateItemAsync<User>(user);
         }
 
         public void readUser()
