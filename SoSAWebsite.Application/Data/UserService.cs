@@ -22,5 +22,25 @@ namespace SoSAWebsite.Application.Data
             var containerManager = containerManagerFactory.GetContainerManager();
             container = containerManager.GetContainer(DatabaseContainers.Users);
         }
+
+        public void createUser()
+        {
+
+        }
+
+        public void readUser()
+        {
+
+        }
+
+        public void updateUser()
+        {
+
+        }
+
+        public void deleteUser()
+        {
+
+        }
     }
 }
