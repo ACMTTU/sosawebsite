@@ -32,6 +32,15 @@ namespace SoSAWebsite.Application.Data
             container.CreateItemAsync<User>(user);
         }
 
+        /// <summary>
+        /// Create a new user
+        /// </summary>
+        /// <param name="containerManagerFactory"></param>
+        public void createUser(String uid, String udisplayName, DateTime uGradDate)
+        {
+
+        }
+
         public void readUser()
         {
 
