@@ -26,7 +26,7 @@ namespace SoSAWebsite.Application.Data
         /// <summary>
         /// Create a new user
         /// </summary>
-        /// <param name="user">A pre-created user to be added to the DB</param>
+        /// <param name="user"> A pre-created user to be added to the DB </param>
         public void createUser(User user)
         {
             container.CreateItemAsync<User>(user);
@@ -35,10 +35,17 @@ namespace SoSAWebsite.Application.Data
         /// <summary>
         /// Create a new user
         /// </summary>
-        /// <param name="containerManagerFactory"></param>
+        /// <param name="uid"> A new user's ID </param>
+        /// <param name="udisplayName"> A new user's display name </param>
+        /// <param name="uGradDate"> A new user's graduation date </param>
         public void createUser(String uid, String udisplayName, DateTime uGradDate)
         {
+            User toBeAdded = new User();
+            toBeAdded.id = uid;
+            toBeAdded.displayName = udisplayName;
+            toBeAdded.graduationDate = uGradDate;
 
+            container.CreateItemAsync<User>(toBeAdded);
         }
 
         public void readUser()
