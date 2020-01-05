@@ -26,7 +26,7 @@ namespace SoSAWebsite.Application.Data
         /// <summary>
         /// Create a new user
         /// </summary>
-        /// <param name="containerManagerFactory"></param>
+        /// <param name="user">A pre-created user to be added to the DB</param>
         public void createUser(User user)
         {
             container.CreateItemAsync<User>(user);
