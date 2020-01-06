@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Models;
 using Microsoft.Azure.Cosmos;
 
-using SoSAWebsite.Application.Data.ContainerManager;
 
 namespace SoSAWebsite.Application.Data
 {
@@ -52,10 +51,23 @@ namespace SoSAWebsite.Application.Data
         /// Get a specific user by their unique ID
         /// </summary>
         /// <param name="id"> A user's ID </param>
-        public async void readUser(String id)
+        public async Task<Models.User> readUser(String id)
         {
             PartitionKey pk = new PartitionKey(id);
-            container.ReadItemAsync<Models.User>(id, pk);
+            Models.User aUser = null;
+
+            try
+            {
+                ItemResponse<Models.User> userItemResponse = await container.ReadItemAsync<Models.User>(id, pk);
+                aUser = userItemResponse.Resource;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+
+            return aUser;
         }
 
         public void updateUser()
