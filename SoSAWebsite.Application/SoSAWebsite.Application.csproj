@@ -16,5 +16,8 @@
   <ItemGroup>
     <Folder Include="Pages\Home\" />
     <Folder Include="Pages\Projects\" />
+    <Folder Include="Pages\Admin\" />
+    <Folder Include="Pages\Admin\ProjectManagement\" />
+    <Folder Include="Pages\Admin\Proposals\" />
   </ItemGroup>
 </Project>

@@ -12,16 +12,15 @@ namespace SoSAWebsite.Application.Data
     public class UserService
     {
 
-        private Container container;
+        private readonly Container container;
 
         /// <summary>
         /// Connect to the database
         /// </summary>
-        /// <param name="containerManagerFactory"></param>
-        public UserService(ContainerManagerFactory containerManagerFactory)
+        /// <param name="cf"></param>
+        public UserService(ContainerFactory cf)
         {
-            var containerManager = containerManagerFactory.GetContainerManager();
-            container = containerManager.GetContainer(DatabaseContainers.Users);
+            container = cf.GetContainer(DatabaseContainers.Users);
         }
 
         /// <summary>

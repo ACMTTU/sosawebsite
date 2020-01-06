@@ -1,0 +1,35 @@
+﻿@page "/admin"
+@using SoSAWebsite.Application.Pages.Admin.ProjectManagement
+@using SoSAWebsite.Application.Pages.Admin.Proposals
+
+<BSRow>
+    <BSTabGroup>
+        <BSCol SM="3">
+            <BSTabList IsPills="true" IsList="true" IsVertical="true">
+                <BSTab>
+                    <BSTabLabel>Review Proposals</BSTabLabel>
+                    <BSTabContent>
+                        <ProposalsView />
+                    </BSTabContent>
+                </BSTab>
+                <BSTab>
+                    <BSTabLabel>Project Management</BSTabLabel>
+                    <BSTabContent>
+                        <ProjectManagementView />
+                    </BSTabContent>
+                </BSTab>
+                <BSTab>
+                    <BSTabLabel>Payments</BSTabLabel>
+                    <BSTabContent>Coming Soon!</BSTabContent>
+                </BSTab>
+            </BSTabList>
+        </BSCol>
+        <BSCol SM="9">
+            <BSTabSelectedContent />
+        </BSCol>
+    </BSTabGroup>
+</BSRow>
+
+@code {
+    // TODO: Need to make sure those who just type in Admin are not able to access it
+}

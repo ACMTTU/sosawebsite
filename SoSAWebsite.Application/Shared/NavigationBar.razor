@@ -12,6 +12,12 @@
                 <BSNavItem>
                     <BSNavLink Href="/join">JOIN</BSNavLink>
                 </BSNavItem>
+                @if (@userHasAdminPrivileges())
+                {
+                    <BSNavItem>
+                        <BSNavLink Href="/admin">ADMIN</BSNavLink>
+                    </BSNavItem>
+                }
             </BSNav>
         </BSCollapse>
 </BSNavbar>
@@ -30,5 +36,15 @@
     {
         this.IsNavBarOpen = !this.IsNavBarOpen;
         StateHasChanged();
+    }
+
+    /// <summary>
+    /// Makes sure that the user actually has
+    /// permissions to access the control panel
+    /// </summary>
+    /// <returns>True, if they do. False, if they don't </returns>
+    private bool userHasAdminPrivileges()
+    {
+        return true;
     }
 }

@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SoSAWebsite.Application.Data;
-using SoSAWebsite.Application.Data.ContainerManager;
 using BlazorStrap;
 using BlazorStyled;
 
@@ -31,8 +30,10 @@ namespace SoSAWebsite.Application
         {
             services.AddSingleton((_) =>
             {
-                return new ContainerManagerFactory(Configuration.GetConnectionString("CosmosDb"));
+                return new ContainerFactory(Configuration.GetConnectionString("CosmosDb"));
             });
+
+            services.AddSingleton<UsersService>();
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
@@ -40,8 +41,8 @@ namespace SoSAWebsite.Application
             services.AddBlazorStyled();
             services.AddBootstrapCSS();
 
-            services.AddSingleton<FooService>();
             services.AddSingleton<UserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
