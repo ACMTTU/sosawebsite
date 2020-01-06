@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Models;
+using Microsoft.Azure.Cosmos;
 
 using SoSAWebsite.Application.Data.ContainerManager;
 
@@ -11,7 +12,7 @@ namespace SoSAWebsite.Application.Data
     public class UserService
     {
 
-        private Microsoft.Azure.Cosmos.Container container;
+        private Container container;
 
         /// <summary>
         /// Connect to the database
@@ -27,9 +28,9 @@ namespace SoSAWebsite.Application.Data
         /// Create a new user
         /// </summary>
         /// <param name="user"> A pre-created user to be added to the DB </param>
-        public void createUser(User user)
+        public void createUser(Models.User user)
         {
-            container.CreateItemAsync<User>(user);
+            container.CreateItemAsync<Models.User>(user);
         }
 
         /// <summary>
@@ -38,19 +39,24 @@ namespace SoSAWebsite.Application.Data
         /// <param name="uid"> A new user's ID </param>
         /// <param name="udisplayName"> A new user's display name </param>
         /// <param name="uGradDate"> A new user's graduation date </param>
-        public void createUser(String uid, String udisplayName, DateTime uGradDate)
+        public async void createUser(String uid, String udisplayName, DateTime uGradDate)
         {
-            User toBeAdded = new User();
+            Models.User toBeAdded = new Models.User();
             toBeAdded.id = uid;
             toBeAdded.displayName = udisplayName;
             toBeAdded.graduationDate = uGradDate;
 
-            container.CreateItemAsync<User>(toBeAdded);
+            await container.CreateItemAsync<Models.User>(toBeAdded);
         }
 
-        public void readUser()
+        /// <summary>
+        /// Get a specific user by their unique ID
+        /// </summary>
+        /// <param name="id"> A user's ID </param>
+        public async void readUser(String id)
         {
-
+            PartitionKey pk = new PartitionKey(id);
+            container.ReadItemAsync<Models.User>(id, pk);
         }
 
         public void updateUser()
